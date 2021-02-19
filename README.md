@@ -1,6 +1,4 @@
-# gulp-dom
-
-[![Dependencies](https://img.shields.io/david/trygve-lie/gulp-dom.svg?style=flat-square)](https://david-dm.org/trygve-lie/gulp-dom)[![Build Status](http://img.shields.io/travis/trygve-lie/gulp-dom/master.svg?style=flat-square)](https://travis-ci.org/trygve-lie/gulp-dom) [![Greenkeeper badge](https://badges.greenkeeper.io/trygve-lie/gulp-dom.svg)](https://greenkeeper.io/)
+# @yodasws/gulp-dom
 
 Gulp plugin for generic DOM manipulation.
 
@@ -10,18 +8,22 @@ operations on any inbound HTML.
 
 This can be used for several things in a build process. Some examples:
 
-* [Append a version number](https://github.com/trygve-lie/gulp-dom/tree/master/examples/append-version) or any other "stamp data" to the document on build time.
-* [Extract inline scripts / css](https://github.com/trygve-lie/gulp-dom/tree/master/examples/extract-inline-scripts) and put them in a separate file.
-* [Fix unvalid markup.](https://github.com/trygve-lie/gulp-dom/tree/master/examples/fix-unvalid-markup)
-* [Remove whitespace](https://github.com/trygve-lie/gulp-dom/tree/master/examples/remove-whitespace) in the document in a safe way.
-* [Replace script / css references](https://github.com/trygve-lie/gulp-dom/tree/master/examples/replace-script-tags) with a new reference (to ex a minified version).
-* [Web scraping.](https://github.com/trygve-lie/gulp-dom/tree/master/examples/web-scrape) Take a document from a URL and transform it or extract parts of it during build.
+* [Append a version number](https://github.com/YodasWs/gulp-dom/tree/master/examples/append-version) or any other "stamp data" to the document on build time.
+* [Extract inline scripts / css](https://github.com/YodasWs/gulp-dom/tree/master/examples/extract-inline-scripts) and put them in a separate file.
+* [Fix unvalid markup.](https://github.com/YodasWs/gulp-dom/tree/master/examples/fix-unvalid-markup)
+* [Remove whitespace](https://github.com/YodasWs/gulp-dom/tree/master/examples/remove-whitespace) in the document in a safe way.
+* [Replace script / css references](https://github.com/YodasWs/gulp-dom/tree/master/examples/replace-script-tags) with a new reference (to ex a minified version).
+* [Web scraping.](https://github.com/YodasWs/gulp-dom/tree/master/examples/web-scrape) Take a document from a URL and transform it or extract parts of it during build.
 
 
 ## Installation
 
 ```bash
-$ npm install gulp-dom
+$ yarn add @yodasws/gulp-dom
+```
+
+```bash
+$ npm install @yodasws/gulp-dom
 ```
 
 
@@ -32,15 +34,14 @@ a HTML document:
 
 ```js
 var gulp = require('gulp'),
-    dom  = require('gulp-dom');
+    dom  = require('@yodasws/gulp-dom');
 
-gulp.task('html', function() {
-    return gulp.src('./src/index.html')
-        .pipe(dom(function(){
-            return this.querySelectorAll('body')[0].setAttribute('data-version', '1.0');
+gulp.task('html', () => gulp.src('./src/index.html')
+        .pipe(dom(function () {
+            this.querySelector('body').setAttribute('data-version', '1.0');
         }))
-        .pipe(gulp.dest('./public/'));
-});
+        .pipe(gulp.dest('./public/')),
+);
 ```
 
 
@@ -65,7 +66,7 @@ which will be passed on to the next step in the gulp chain.
 Example of basic mutator function:
 
 ```js
-dom(function(){
+dom(function () {
     // 'this' holds the DOM and we can something on it
     this.getElementById('foo').setAttribute('class', 'bar');
 
@@ -87,12 +88,12 @@ important that serialization is turned off. Please see the
 
 Type: `Boolean`
 
-By default the pugin assume that the returned value form the mutator function
+By default the pugin assume that the returned value from the mutator function
 is a DOM document and will then serialize the value into HTML document.
 
 This attribute turns this serialization on and off. By providing no value or
 `true` the returned value of the mutator function will be serialized. By
-providing `false` the returned value of the mutator function will not be
+providing `false`, the returned value of the mutator function will not be
 serialized.
 
 If the returned value of the mutator function is a `String` this values should
@@ -102,20 +103,20 @@ Example of mutator function which returns the content of a inline script tag as
 a `String`:
 
 ```js
-dom(function(){
-    return this.querySelectorAll('script:not([src])')[0].innerHTML;
+dom(function () {
+    return this.querySelector('script:not([src])').innerHTML;
 }, false)
 ```
 
 
 ## A note on jsdom
 
-This plugin wraps [jsdom](https://github.com/tmpvar/jsdom). Though, this plugin
+This plugin wraps [jsdom](https://github.com/tmpvar/jsdom). However, this plugin
 does not enable all features provided by jsdom. The sole purpose for jsdom in
 this plugin is to parse a HTML document into a DOM so we can run operations on
 it.
 
-Features such as injecting scripts into the DOM which jsdom can do is not
+Features such as injecting scripts into the DOM, which jsdom can do, is not
 enabled in this plugin.
 
 
@@ -132,7 +133,9 @@ Tests are written in [mocha](http://mochajs.org/).
 
 The MIT License (MIT)
 
-Copyright (c) 2014 - Trygve Lie - post@trygve-lie.com
+Copyright © 2014 — Trygve Lie
+
+Copyright © 2021 — Sam Grundman
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
