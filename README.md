@@ -1,6 +1,6 @@
 # @yodasws/gulp-dom
 
-Gulp plugin for generic DOM manipulation.
+Gulp plugin for generic DOM manipulation using [jsdom](https://github.com/jsdom/jsdom) __v16__.
 
 This [Gulp](http://gulpjs.com/) plugin is a simple wrapper around
 [jsdom](https://github.com/tmpvar/jsdom) making it possible to run DOM
@@ -15,7 +15,6 @@ This can be used for several things in a build process. Some examples:
 * [Replace script / css references](https://github.com/YodasWs/gulp-dom/tree/master/examples/replace-script-tags) with a new reference (to ex a minified version).
 * [Web scraping.](https://github.com/YodasWs/gulp-dom/tree/master/examples/web-scrape) Take a document from a URL and transform it or extract parts of it during build.
 
-
 ## Installation
 
 ```bash
@@ -25,7 +24,6 @@ $ yarn add @yodasws/gulp-dom
 ```bash
 $ npm install @yodasws/gulp-dom
 ```
-
 
 ## Basic example
 
@@ -44,11 +42,9 @@ gulp.task('html', () => gulp.src('./src/index.html')
 );
 ```
 
-
 ## Usage
 
 The plugin has only one method which takes two attributes:
-
 
 ### mutator
 
@@ -83,7 +79,6 @@ If the mutator function shall return something else than a DOM document its
 important that serialization is turned off. Please see the
 [serialize attribute](#serialize) for further information.
 
-
 ### serialize
 
 Type: `Boolean`
@@ -108,7 +103,6 @@ dom(function () {
 }, false)
 ```
 
-
 ## A note on jsdom
 
 This plugin wraps [jsdom](https://github.com/tmpvar/jsdom). However, this plugin
@@ -119,7 +113,6 @@ it.
 Features such as injecting scripts into the DOM, which jsdom can do, is not
 enabled in this plugin.
 
-
 ## Tests
 
 ```bash
@@ -128,29 +121,6 @@ $ npm test
 
 Tests are written in [mocha](http://mochajs.org/).
 
+## What about plain [gulp-dom](https://github.com/trygve-lie/gulp-dom)?
 
-## License
-
-The MIT License (MIT)
-
-Copyright © 2014 — Trygve Lie
-
-Copyright © 2021 — Sam Grundman
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+It hasn't been updated since 21 Oct 2021! And I needed to use [jsdom](https://github.com/jsdom/jsdom) v16.
